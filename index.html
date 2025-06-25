@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu về ANIW - Cộng đồng Anime/Manga</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fce7f3; /* Light pink background */
+            color: #4a4a4a; /* Dark grey text */
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .header-section {
+            background: linear-gradient(135deg, #fbcfe8 0%, #e879f9 100%); /* Pink to purple gradient */
+            border-radius: 2rem;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 3rem;
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #be185d; /* Darker pink for titles */
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .card {
+            background-color: #fff;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        .cta-button {
+            background: linear-gradient(45deg, #ec4899, #d946ef); /* Pink to vibrant purple */
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 9999px; /* Fully rounded */
+            font-weight: 700;
+            font-size: 1.125rem;
+            text-decoration: none;
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            display: inline-block;
+            margin-top: 1.5rem;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(236, 72, 153, 0.4);
+        }
+        .feature-icon {
+            font-size: 3rem;
+            color: #d946ef; /* Purple for icons */
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background-color: #fee2e2; /* Light red */
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #dc2626; /* Red text */
+            overflow: hidden; /* To keep text within bounds if too long */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header-section">
+            <h1 class="text-5xl font-extrabold text-white mb-4 drop-shadow-lg">
+                Chào mừng đến với ANIW! ✨
+            </h1>
+            <p class="text-xl text-pink-100 mb-6 max-w-2xl mx-auto">
+                Khám phá thế giới anime & manga cùng cộng đồng đầy nhiệt huyết của chúng tôi.
+                Nơi những đam mê được kết nối và thăng hoa!
+            </p>
+            <a href="#join-us" class="cta-button">
+                Tham Gia Ngay!
+            </a>
+        </header>
+
+        <!-- About ANIW Section -->
+        <section id="about-aniw" class="py-12">
+            <h2 class="section-title">Về ANIW 🌸</h2>
+            <div class="card p-8 flex flex-col md:flex-row items-center gap-8">
+                <div class="md:w-1/2">
+                    <img src="https://placehold.co/600x400/FFC0CB/880E4F?text=Anime+Fan+Community" alt="Cộng đồng người hâm mộ Anime" class="rounded-xl shadow-lg w-full h-auto">
+                </div>
+                <div class="md:w-1/2 text-left">
+                    <h3 class="text-2xl font-bold text-pink-700 mb-4">Chúng tôi là ai?</h3>
+                    <p class="text-lg text-gray-700 mb-4">
+                        ANIW là viết tắt của "Anime & Waifu Infinity World", một cộng đồng phi lợi nhuận dành cho những người hâm mộ anime, manga, và văn hóa Nhật Bản.
+                        Chúng tôi được thành lập với sứ mệnh kết nối những trái tim yêu mến thế giới ảo diệu này, tạo nên một không gian chia sẻ, học hỏi và phát triển.
+                    </p>
+                    <p class="text-lg text-gray-700">
+                        Với hàng ngàn thành viên từ khắp nơi, ANIW tự hào là ngôi nhà chung nơi mọi người có thể tự do thể hiện cá tính, tìm thấy những người bạn cùng sở thích, và cùng nhau xây dựng một cộng đồng vững mạnh.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activities & Events Section -->
+        <section id="activities" class="py-12">
+            <h2 class="section-title">Hoạt động & Sự kiện nổi bật ✨</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card text-center">
+                    <span class="feature-icon">📚</span>
+                    <h3 class="text-xl font-bold text-pink-600 mb-2">Buổi thảo luận Anime/Manga</h3>
+                    <p class="text-gray-600">
+                        Hàng tuần, chúng tôi tổ chức các buổi thảo luận sôi nổi về các bộ anime, manga mới nhất, các nhân vật yêu thích và những giả thuyết hấp dẫn.
+                    </p>
+                </div>
+                <div class="card text-center">
+                    <span class="feature-icon">🎨</span>
+                    <h3 class="text-xl font-bold text-pink-600 mb-2">Cuộc thi Fanart & Cosplay</h3>
+                    <p class="text-gray-600">
+                        Thỏa sức sáng tạo và thể hiện tài năng nghệ thuật của bạn qua các cuộc thi vẽ fanart, cosplay, và nhận về những phần thưởng giá trị.
+                    </p>
+                </div>
+                <div class="card text-center">
+                    <span class="feature-icon">🎮</span>
+                    <h3 class="text-xl font-bold text-pink-600 mb-2">Đêm Games & Giao lưu</h3>
+                    <p class="text-gray-600">
+                        Cùng nhau vui chơi với các trò chơi anime, board game, và các hoạt động giao lưu thú vị để kết nối tình bạn.
+                    </p>
+                </div>
+                <div class="card text-center">
+                    <span class="feature-icon">🎤</span>
+                    <h3 class="text-xl font-bold text-pink-600 mb-2">Karaoke & Watch Party</h3>
+                    <p class="text-gray-600">
+                        Hát những bài hát anime yêu thích hoặc cùng nhau xem lại những tập phim kinh điển trong không khí ấm cúng.
+                    </p>
+                </div>
+                <div class="card text-center">
+                    <span class="feature-icon">🎉</span>
+                    <h3 class="text-xl font-bold text-pink-600 mb-2">Sự kiện Offline lớn</h3>
+                    <p class="text-gray-600">
+                        Các buổi gặp mặt thường niên, lễ hội, hoặc picnic theo chủ đề anime/manga để gắn kết các thành viên.
+                    </p>
+                </div>
+                <div class="card text-center">
+                    <span class="feature-icon">🎁</span>
+                    <h3 class="text-xl font-bold text-pink-600 mb-2">Trao đổi & Đấu giá Figure/Merch</h3>
+                    <p class="text-gray-600">
+                        Cơ hội để tìm kiếm những món đồ hiếm, trao đổi figure, hoặc mua sắm các sản phẩm liên quan đến anime/manga.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Values Section -->
+        <section id="values" class="py-12">
+            <h2 class="section-title">Giá trị cốt lõi của chúng tôi ❤</h2>
+            <div class="card p-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div>
+                    <span class="feature-icon text-pink-500">💖</span>
+                    <h3 class="text-xl font-bold text-pink-700 mb-2">Đam mê</h3>
+                    <p class="text-gray-600">
+                        Chúng tôi sống và hít thở không khí của anime, manga. Đam mê là ngọn lửa thắp sáng mọi hoạt động của ANIW.
+                    </p>
+                </div>
+                <div>
+                    <span class="feature-icon text-purple-500">🤝</span>
+                    <h3 class="text-xl font-bold text-pink-700 mb-2">Kết nối</h3>
+                    <p class="text-gray-600">
+                        ANIW là nơi mọi người tìm thấy tiếng nói chung, xây dựng tình bạn và chia sẻ những câu chuyện về sở thích của mình.
+                    </p>
+                </div>
+                <div>
+                    <span class="feature-icon text-yellow-500">🌟</span>
+                    <h3 class="text-xl font-bold text-pink-700 mb-2">Sáng tạo</h3>
+                    <p class="text-gray-600">
+                        Chúng tôi khuyến khích sự tự do thể hiện, từ fanart, fanfiction đến cosplay, mọi ý tưởng đều được đón nhận.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Join Us Section -->
+        <section id="join-us" class="py-12 text-center">
+            <h2 class="section-title">Tham gia cùng chúng tôi ngay! 🎉</h2>
+            <div class="card p-8">
+                <p class="text-lg text-gray-700 mb-6 max-w-3xl mx-auto">
+                    Bạn đã sẵn sàng trở thành một phần của gia đình ANIW chưa? Đừng ngần ngại!
+                    Chúng tôi luôn chào đón những thành viên mới với trái tim rộng mở và vòng tay ấm áp.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <a href="#" class="cta-button">
+                        Đăng Ký Thành Viên
+                    </a>
+                    <a href="#" class="cta-button bg-purple-500 hover:bg-purple-600">
+                        Gia Nhập Discord
+                    </a>
+                </div>
+                <p class="text-sm text-gray-500 mt-4">
+                    (Các liên kết trên chỉ là ví dụ, Hoàng có thể thay thế bằng liên kết thật của cộng đồng nhé!)
+                </p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-12">
+            <h2 class="section-title">Liên hệ chúng tôi 💌</h2>
+            <div class="card p-8 text-center">
+                <p class="text-lg text-gray-700 mb-4">
+                    Nếu bạn có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với đội ngũ của ANIW.
+                    Chúng tôi luôn sẵn lòng hỗ trợ bạn!
+                </p>
+                <p class="text-xl font-bold text-pink-600 mb-2">
+                    Email: <a href="mailto:info@aniw.com" class="text-purple-600 hover:underline">info@aniw.com</a>
+                </p>
+                <p class="text-xl font-bold text-pink-600">
+                    Fanpage: <a href="https://facebook.com/aniwcommunity" target="_blank" class="text-purple-600 hover:underline">facebook.com/aniwcommunity</a>
+                </p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-8 text-center text-gray-500 text-sm mt-12 border-t border-pink-200">
+            &copy; 2025 ANIW - Anime & Waifu Infinity World. Mọi quyền được bảo lưu.
+            <p class="mt-2">Được tạo bởi ANIW LLC</p>
+        </footer>
+    </div>
+</body>
+</html>
