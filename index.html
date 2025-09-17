@@ -3,242 +3,530 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giới thiệu về ANIW - Cộng đồng Anime/Manga</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Font: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>CLB Người Yêu Thích Anime/Manga</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap');
+
+        :root {
+            --bg-color: #F8F0E5;
+            --main-bg: #FFF8F3;
+            --container-bg: #FFFFFF;
+            --header-bg: linear-gradient(135deg, #FFDFD3, #FFEADD);
+            --border-color: #EADBC8;
+            --text-color: #63455A;
+            --heading-color: #A37E94;
+            --accent-color-1: #FFB5C5;
+            --accent-color-2: #FFC0CB;
+            --button-bg: linear-gradient(135deg, #FFB5C5, #EFA8B8);
+            --button-hover-bg: linear-gradient(135deg, #EFA8B8, #FFB5C5);
+            --shadow-color: rgba(163, 126, 148, 0.1);
+            --star-color: #FFC8DE;
+            --heart-color: #FFB3C6;
+            --pixel-size: 2px;
+            --scrollbar-thumb-color: #FFC0CB;
+            --scrollbar-track-color: #F8F0E5;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #fce7f3; /* Light pink background */
-            color: #4a4a4a; /* Dark grey text */
-            line-height: 1.6;
+            font-family: 'M PLUS Rounded 1c', sans-serif;
+            background-color: var(--bg-color);
+            background-image:
+                radial-gradient(circle at 15% 15%, var(--star-color) var(--pixel-size), transparent var(--pixel-size)),
+                radial-gradient(circle at 85% 10%, var(--star-color) var(--pixel-size), transparent var(--pixel-size)),
+                radial-gradient(circle at 10% 85%, var(--heart-color) var(--pixel-size), transparent var(--pixel-size)),
+                radial-gradient(circle at 90% 90%, var(--heart-color) var(--pixel-size), transparent var(--pixel-size));
+            background-size: 50px 50px;
+            color: var(--text-color);
+            line-height: 1.8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+            overflow-x: hidden;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+        
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-        .header-section {
-            background: linear-gradient(135deg, #fbcfe8 0%, #e879f9 100%); /* Pink to purple gradient */
-            border-radius: 2rem;
-            padding: 3rem 2rem;
-            text-align: center;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            margin-bottom: 3rem;
+
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbar-track-color);
         }
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #be185d; /* Darker pink for titles */
-            margin-bottom: 1.5rem;
-            text-align: center;
+
+        ::-webkit-scrollbar-thumb {
+            background-color: var(--scrollbar-thumb-color);
+            border-radius: 10px;
+            border: 2px solid var(--scrollbar-track-color);
         }
-        .card {
-            background-color: #fff;
-            border-radius: 1.5rem;
-            padding: 2rem;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-        }
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
-        }
-        .cta-button {
-            background: linear-gradient(45deg, #ec4899, #d946ef); /* Pink to vibrant purple */
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 9999px; /* Fully rounded */
-            font-weight: 700;
-            font-size: 1.125rem;
-            text-decoration: none;
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-            display: inline-block;
-            margin-top: 1.5rem;
-        }
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(236, 72, 153, 0.4);
-        }
-        .feature-icon {
-            font-size: 3rem;
-            color: #d946ef; /* Purple for icons */
-            margin-bottom: 1rem;
-            display: inline-block;
-        }
-        .image-placeholder {
+        
+        #app-window {
             width: 100%;
-            height: 200px;
-            background-color: #fee2e2; /* Light red */
-            border-radius: 1rem;
+            max-width: 900px;
+            height: 90vh;
+            max-height: 1200px;
+            background-color: var(--main-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: fadeIn 1s ease-out;
+            transition: transform 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .title-bar {
+            background: var(--header-bg);
+            padding: 10px 15px;
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: #dc2626; /* Red text */
-            overflow: hidden; /* To keep text within bounds if too long */
+            justify-content: space-between;
+            user-select: none;
+            position: relative;
+            z-index: 10;
         }
+        
+        .title-bar-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .window-controls {
+            display: flex;
+            gap: 6px;
+        }
+
+        .control-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .dot-red { background-color: #ff5f56; }
+        .dot-yellow { background-color: #ffbd2e; }
+        .dot-green { background-color: #27c93f; }
+
+        .window-title {
+            font-weight: 700;
+            color: var(--heading-color);
+            font-size: 1rem;
+            text-shadow: 1px 1px 2px #fff;
+        }
+
+        .title-bar-right .pixel-icon {
+            font-size: 1.5rem;
+            color: var(--heading-color);
+        }
+
+        .pixel-art-decoration {
+            display: inline-block;
+            line-height: 1;
+            color: var(--heart-color);
+            position: absolute;
+        }
+
+        #star-1 { top: 5%; left: 5%; transform: rotate(15deg); }
+        #heart-1 { top: 12%; right: 7%; }
+        #star-2 { bottom: 5%; right: 5%; transform: rotate(-15deg); }
+        #heart-2 { bottom: 10%; left: 8%; }
+
+        .main-content {
+            padding: 30px 40px;
+            overflow-y: auto;
+            flex-grow: 1;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 {
+            color: var(--heading-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-weight: 800;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.05);
+            letter-spacing: 1px;
+        }
+
+        h1 { font-size: 2rem; }
+        h2 { font-size: 1.6rem; margin-top: 3rem;}
+        h3 { font-size: 1.2rem; margin-top: 2rem; text-align: left; position: relative; padding-left: 20px;}
+        h3::before {
+            content: '🌸';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.1rem;
+        }
+
+        p, li {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            text-align: justify;
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .activities-list li {
+            background-color: #FFFDFB;
+            border: 1px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 15px 20px 15px 45px;
+            margin-bottom: 15px;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px var(--shadow-color);
+        }
+
+        .activities-list li:hover {
+            transform: translateY(-3px) scale(1.02);
+            border-style: solid;
+            border-color: var(--accent-color-1);
+        }
+
+        .activities-list li::before {
+            position: absolute;
+            left: 15px;
+            top: 19px;
+            font-size: 1.2rem;
+        }
+        
+        .activity-anime::before { content: '🎬'; }
+        .activity-manga::before { content: '📚'; }
+        .activity-creative::before { content: '🎨'; }
+        .activity-game::before { content: '🧠'; }
+        .activity-culture::before { content: '🌸'; }
+        
+        strong {
+            color: #d66c82;
+            font-weight: 700;
+        }
+        
+        .call-to-action-container {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, #FEF2F5, #FFF5F7);
+            border: 1px solid var(--accent-color-1);
+            border-radius: 20px;
+        }
+        
+        .join-us-button {
+            display: inline-block;
+            background: var(--button-bg);
+            color: white;
+            padding: 18px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(255, 181, 197, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: none;
+        }
+
+        .join-us-button::before {
+            content: '✨';
+            position: absolute;
+            top: 50%;
+            left: -30px;
+            transform: translateY(-50%) rotate(0deg);
+            opacity: 0;
+            transition: all 0.5s ease;
+        }
+
+        .join-us-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 181, 197, 0.6);
+            background: var(--button-hover-bg);
+        }
+        
+        .join-us-button:hover::before {
+            left: 20px;
+            transform: translateY(-50%) rotate(360deg);
+            opacity: 1;
+        }
+
+        .rules-container {
+            margin-top: 3rem;
+        }
+        
+        .rules-container ul {
+            padding-left: 20px;
+        }
+
+        .rules-container ul li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 0.8rem;
+        }
+        
+        .rules-container ul li::before {
+            content: '📌';
+            position: absolute;
+            left: 0;
+            top: 2px;
+            font-size: 1.1em;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            color: var(--heading-color);
+        }
+        
+        footer a {
+            color: var(--accent-color-1);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            body { padding: 1rem; }
+            #app-window { height: 95vh; }
+            .main-content { padding: 20px; }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1.4rem; }
+            p, li { font-size: 0.95rem; }
+            .call-to-action-container { padding: 1.5rem; }
+            .join-us-button { padding: 15px 30px; font-size: 1rem; }
+        }
+
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header Section -->
-        <header class="header-section">
-            <h1 class="text-5xl font-extrabold text-white mb-4 drop-shadow-lg">
-                Chào mừng đến với ANIW! ✨
-            </h1>
-            <p class="text-xl text-pink-100 mb-6 max-w-2xl mx-auto">
-                Khám phá thế giới anime & manga cùng cộng đồng đầy nhiệt huyết của chúng tôi.
-                Nơi những đam mê được kết nối và thăng hoa!
-            </p>
-            <a href="#join-us" class="cta-button">
-                Tham Gia Ngay!
-            </a>
+
+    <div id="app-window">
+        <header class="title-bar">
+            <div class="title-bar-left">
+                <div class="window-controls">
+                    <span class="control-dot dot-red"></span>
+                    <span class="control-dot dot-yellow"></span>
+                    <span class="control-dot dot-green"></span>
+                </div>
+                <div class="window-title">♡ Club Anime Manga ♡</div>
+            </div>
         </header>
+        
+        <main class="main-content" id="main-content-scroll">
+            
+            <h1>ĐƠN ĐĂNG KÍ VÀO CLB ANIME/MANGA</h1>
 
-        <!-- About ANIW Section -->
-        <section id="about-aniw" class="py-12">
-            <h2 class="section-title">Về ANIW 🌸</h2>
-            <div class="card p-8 flex flex-col md:flex-row items-center gap-8">
-                <div class="md:w-1/2">
-                    <img src="https://placehold.co/600x400/FFC0CB/880E4F?text=Anime+Fan+Community" alt="Cộng đồng người hâm mộ Anime" class="rounded-xl shadow-lg w-full h-auto">
-                </div>
-                <div class="md:w-1/2 text-left">
-                    <h3 class="text-2xl font-bold text-pink-700 mb-4">Chúng tôi là ai?</h3>
-                    <p class="text-lg text-gray-700 mb-4">
-                        ANIW là viết tắt của "Anime & Waifu Infinity World", một cộng đồng phi lợi nhuận dành cho những người hâm mộ anime, manga, và văn hóa Nhật Bản.
-                        Chúng tôi được thành lập với sứ mệnh kết nối những trái tim yêu mến thế giới ảo diệu này, tạo nên một không gian chia sẻ, học hỏi và phát triển.
-                    </p>
-                    <p class="text-lg text-gray-700">
-                        Với hàng ngàn thành viên từ khắp nơi, ANIW tự hào là ngôi nhà chung nơi mọi người có thể tự do thể hiện cá tính, tìm thấy những người bạn cùng sở thích, và cùng nhau xây dựng một cộng đồng vững mạnh.
-                    </p>
-                </div>
+            <p>Bạn có phải là người <strong>"cháy"</strong> hết mình với từng khung hình anime đẹp mắt? Bạn có thể <strong>"mất ăn mất ngủ"</strong> để theo dõi chương manga mới nhất? Bạn có muốn tìm một nơi để cùng "chiến hữu" bàn luận về những isekai đỉnh cao, những trận chiến shounen nảy lửa, hay những câu chuyện tình shoujo ngọt ngào?</p>
+
+            <div class="call-to-action-container">
+                <h2>CHÀO MỪNG BẠN ĐẾN VỚI CÂU LẠC BỘ<br>NHỮNG NGƯỜI YÊU THÍCH ANIME/MANGA!</h2>
             </div>
-        </section>
+            
+            <p>Đây không chỉ là một câu lạc bộ, đây là "thánh địa" nơi những tâm hồn đồng điệu tìm thấy nhau, là nơi chúng ta cùng nhau khám phá và tôn vinh nền văn hóa 2D đặc sắc của Nhật Bản. Gia nhập cùng chúng mình, bạn sẽ được:</p>
 
-        <!-- Activities & Events Section -->
-        <section id="activities" class="py-12">
-            <h2 class="section-title">Hoạt động & Sự kiện nổi bật ✨</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="card text-center">
-                    <span class="feature-icon">📚</span>
-                    <h3 class="text-xl font-bold text-pink-600 mb-2">Buổi thảo luận Anime/Manga</h3>
-                    <p class="text-gray-600">
-                        Hàng tuần, chúng tôi tổ chức các buổi thảo luận sôi nổi về các bộ anime, manga mới nhất, các nhân vật yêu thích và những giả thuyết hấp dẫn.
-                    </p>
-                </div>
-                <div class="card text-center">
-                    <span class="feature-icon">🎨</span>
-                    <h3 class="text-xl font-bold text-pink-600 mb-2">Cuộc thi Fanart & Cosplay</h3>
-                    <p class="text-gray-600">
-                        Thỏa sức sáng tạo và thể hiện tài năng nghệ thuật của bạn qua các cuộc thi vẽ fanart, cosplay, và nhận về những phần thưởng giá trị.
-                    </p>
-                </div>
-                <div class="card text-center">
-                    <span class="feature-icon">🎮</span>
-                    <h3 class="text-xl font-bold text-pink-600 mb-2">Đêm Games & Giao lưu</h3>
-                    <p class="text-gray-600">
-                        Cùng nhau vui chơi với các trò chơi anime, board game, và các hoạt động giao lưu thú vị để kết nối tình bạn.
-                    </p>
-                </div>
-                <div class="card text-center">
-                    <span class="feature-icon">🎤</span>
-                    <h3 class="text-xl font-bold text-pink-600 mb-2">Karaoke & Watch Party</h3>
-                    <p class="text-gray-600">
-                        Hát những bài hát anime yêu thích hoặc cùng nhau xem lại những tập phim kinh điển trong không khí ấm cúng.
-                    </p>
-                </div>
-                <div class="card text-center">
-                    <span class="feature-icon">🎉</span>
-                    <h3 class="text-xl font-bold text-pink-600 mb-2">Sự kiện Offline lớn</h3>
-                    <p class="text-gray-600">
-                        Các buổi gặp mặt thường niên, lễ hội, hoặc picnic theo chủ đề anime/manga để gắn kết các thành viên.
-                    </p>
-                </div>
-                <div class="card text-center">
-                    <span class="feature-icon">🎁</span>
-                    <h3 class="text-xl font-bold text-pink-600 mb-2">Trao đổi & Đấu giá Figure/Merch</h3>
-                    <p class="text-gray-600">
-                        Cơ hội để tìm kiếm những món đồ hiếm, trao đổi figure, hoặc mua sắm các sản phẩm liên quan đến anime/manga.
-                    </p>
-                </div>
+            <ul class="activities-list">
+                <li class="activity-anime">
+                    <strong>Thưởng thức Anime:</strong> Cùng nhau xem những tập đầu tiên của các bộ anime hot nhất mùa, những movie kinh điển, và cả những "siêu phẩm" ẩn mình mà bạn có thể đã bỏ lỡ.
+                </li>
+                <li class="activity-manga">
+                    <strong>Chìm đắm trong Manga & Light Novel:</strong> Chia sẻ và giới thiệu những bộ manga, light novel tâm đắc. Cùng nhau phân tích những "plot twist" hack não và những nhân vật có chiều sâu.
+                </li>
+                 <li class="activity-creative">
+                    <strong>Giao lưu & Sáng tạo:</strong> Tham gia các buổi workshop vẽ fanart, các cuộc thi cosplay mini, hoặc đơn giản là cùng nhau sáng tạo nên những câu chuyện của riêng mình.
+                </li>
+                <li class="activity-game">
+                    <strong>Đấu trí & Giải trí:</strong> "Đốt cháy nơ-ron" với những trận đấu trivia về thế giới anime/manga, các trò chơi board game phong cách Nhật Bản và vô vàn hoạt động vui nhộn khác.
+                </li>
+                 <li class="activity-culture">
+                    <strong>Khám phá Văn hóa Nhật Bản:</strong> Không chỉ anime/manga, chúng ta sẽ cùng tìm hiểu về ẩm thực, lễ hội, âm nhạc (J-Pop, anison), và những nét văn hóa thú vị khác của xứ sở hoa anh đào.
+                </li>
+            </ul>
+
+            <p>Bất kể bạn là một <strong>"wibu"</strong> chính hiệu hay chỉ là người mới bắt đầu tò mò về thế giới này, chỉ cần bạn có tình yêu với anime/manga, hãy về với "ngôi nhà" của chúng mình!</p>
+
+            <div class="call-to-action-container">
+                 <a href="https://forms.gle/pxsu9CVXhushR4cR9" target="_blank" class="join-us-button" id="join-btn">
+                   Tham Gia Ngay!
+                </a>
             </div>
-        </section>
 
-        <!-- Core Values Section -->
-        <section id="values" class="py-12">
-            <h2 class="section-title">Giá trị cốt lõi của chúng tôi ❤</h2>
-            <div class="card p-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                <div>
-                    <span class="feature-icon text-pink-500">💖</span>
-                    <h3 class="text-xl font-bold text-pink-700 mb-2">Đam mê</h3>
-                    <p class="text-gray-600">
-                        Chúng tôi sống và hít thở không khí của anime, manga. Đam mê là ngọn lửa thắp sáng mọi hoạt động của ANIW.
-                    </p>
-                </div>
-                <div>
-                    <span class="feature-icon text-purple-500">🤝</span>
-                    <h3 class="text-xl font-bold text-pink-700 mb-2">Kết nối</h3>
-                    <p class="text-gray-600">
-                        ANIW là nơi mọi người tìm thấy tiếng nói chung, xây dựng tình bạn và chia sẻ những câu chuyện về sở thích của mình.
-                    </p>
-                </div>
-                <div>
-                    <span class="feature-icon text-yellow-500">🌟</span>
-                    <h3 class="text-xl font-bold text-pink-700 mb-2">Sáng tạo</h3>
-                    <p class="text-gray-600">
-                        Chúng tôi khuyến khích sự tự do thể hiện, từ fanart, fanfiction đến cosplay, mọi ý tưởng đều được đón nhận.
-                    </p>
-                </div>
+            <div class="rules-container">
+                <h2>✨ NỘI QUY SINH HOẠT ✨</h2>
+                <h3>Điều 1: Mục đích - Tôn chỉ</h3>
+                <ul>
+                    <li>Tạo ra một sân chơi chung, một "thế giới song song" lành mạnh, sáng tạo và đầy đam mê cho tất cả những trái tim yêu thích văn hóa Anime/Manga.</li>
+                    <li>Thúc đẩy tinh thần học hỏi, chia sẻ kiến thức và giao lưu văn hóa Nhật Bản qua lăng kính Anime và Manga.</li>
+                    <li>Xây dựng một cộng đồng gắn kết, nơi mỗi thành viên có thể tự do thể hiện cá tính, phát huy khả năng sáng tạo (vẽ, viết, cosplay,...) và tìm thấy những người bạn cùng chung sở thích.</li>
+                </ul>
+
+                <h3>Điều 2: Đối tượng và phạm vi áp dụng</h3>
+                 <ul>
+                    <li>Toàn thể Thành viên chính thức và Cộng tác viên của CLB.</li>
+                    <li>Tất cả Khách mời đến tham dự các buổi sinh hoạt, sự kiện, workshop do CLB tổ chức.</li>
+                </ul>
+
+                <h3>Điều 3: Quy tắc ứng xử chung ("Luật Bất Thành Văn" của thế giới Otaku)</h3>
+                <p>Hoạt động của CLB dựa trên tinh thần <strong>đam mê - tự nguyện - tôn trọng - đoàn kết - công bằng và văn minh</strong>.</p>
+                <ul>
+                    <li><strong>Tham gia & Trách nhiệm:</strong> Thành viên có trách nhiệm tham gia các buổi sinh hoạt định kỳ. Nếu có lý do chính đáng không thể tham dự, vui lòng báo trước. Hoàn thành phí thành viên (nếu có) đầy đủ, đúng hạn.</li>
+                    <li><strong>Văn Hóa Giao Tiếp:</strong> Luôn giữ thái độ lịch sự, hòa đồng. "Tôn trọng gu của nhau, không toxic". Thảo luận văn minh, không công kích cá nhân.</li>
+                    <li><strong>NGHIÊM CẤM SPOILER:</strong> Không "spoiler" trắng trợn khi chưa có sự đồng ý hoặc cảnh báo.</li>
+                    <li><strong>Trong Sự Kiện:</strong> Trang phục lịch sự (khuyến khích cosplay). CẤM hút thuốc, rượu bia, chất kích thích, cờ bạc, và các hành vi thiếu văn hóa. Giữ gìn vệ sinh chung.</li>
+                </ul>
+
+                <h3>Điều 4: Tổ chức thực hiện</h3>
+                <ul>
+                     <li>Ban Quản lý có trách nhiệm phổ biến và làm gương. Mọi thành viên có trách nhiệm giám sát và nhắc nhở nhau.</li>
+                    <li>Mọi vi phạm sẽ được xử lý theo quy định của CLB để giữ gìn môi trường trong sạch.</li>
+                </ul>
             </div>
-        </section>
+             
+            <footer>
+                <p>CÙNG NHAU, CHÚNG TA SẼ TẠO NÊN MỘT THẾ GIỚI 2D SỐNG ĐỘNG HƠN BAO GIỜ HẾT!</p>
+                <p>Liên hệ: <a href="mailto:admin@aniw.xyz">admin@aniw.xyz</a></p>
+            </footer>
 
-        <!-- Join Us Section -->
-        <section id="join-us" class="py-12 text-center">
-            <h2 class="section-title">Tham gia cùng chúng tôi ngay! 🎉</h2>
-            <div class="card p-8">
-                <p class="text-lg text-gray-700 mb-6 max-w-3xl mx-auto">
-                    Bạn đã sẵn sàng trở thành một phần của gia đình ANIW chưa? Đừng ngần ngại!
-                    Chúng tôi luôn chào đón những thành viên mới với trái tim rộng mở và vòng tay ấm áp.
-                </p>
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                    <a href="#" class="cta-button">
-                        Đăng Ký Thành Viên
-                    </a>
-                    <a href="#" class="cta-button bg-purple-500 hover:bg-purple-600">
-                        Gia Nhập Discord
-                    </a>
-                </div>
-                <p class="text-sm text-gray-500 mt-4">
-                    (Các liên kết trên chỉ là ví dụ, Hoàng có thể thay thế bằng liên kết thật của cộng đồng nhé!)
-                </p>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="py-12">
-            <h2 class="section-title">Liên hệ chúng tôi 💌</h2>
-            <div class="card p-8 text-center">
-                <p class="text-lg text-gray-700 mb-4">
-                    Nếu bạn có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với đội ngũ của ANIW.
-                    Chúng tôi luôn sẵn lòng hỗ trợ bạn!
-                </p>
-                <p class="text-xl font-bold text-pink-600 mb-2">
-                    Email: <a href="mailto:info@aniw.com" class="text-purple-600 hover:underline">info@aniw.com</a>
-                </p>
-                <p class="text-xl font-bold text-pink-600">
-                    Fanpage: <a href="https://facebook.com/aniwcommunity" target="_blank" class="text-purple-600 hover:underline">facebook.com/aniwcommunity</a>
-                </p>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="py-8 text-center text-gray-500 text-sm mt-12 border-t border-pink-200">
-            &copy; 2025 ANIW - Anime & Waifu Infinity World. Mọi quyền được bảo lưu.
-            <p class="mt-2">Được tạo bởi ANIW LLC</p>
-        </footer>
+        </main>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const windowElement = document.getElementById('app-window');
+            const titleBar = document.querySelector('.title-bar');
+            let isDragging = false;
+            let offsetX, offsetY;
+
+            const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+            
+            if (window.innerWidth > 768) {
+                titleBar.addEventListener('mousedown', (e) => {
+                    isDragging = true;
+                    offsetX = e.clientX - windowElement.getBoundingClientRect().left;
+                    offsetY = e.clientY - windowElement.getBoundingClientRect().top;
+                    windowElement.style.transition = 'none';
+                    document.body.style.userSelect = 'none';
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    
+                    const viewportWidth = window.innerWidth;
+                    const viewportHeight = window.innerHeight;
+                    const windowWidth = windowElement.offsetWidth;
+                    const windowHeight = windowElement.offsetHeight;
+
+                    let newX = e.clientX - offsetX;
+                    let newY = e.clientY - offsetY;
+
+                    const maxX = viewportWidth - windowWidth;
+                    const maxY = viewportHeight - windowHeight;
+
+                    newX = clamp(newX, 0, maxX);
+                    newY = clamp(newY, 0, maxY);
+                    
+                    windowElement.style.position = 'absolute';
+                    windowElement.style.left = `${newX}px`;
+                    windowElement.style.top = `${newY}px`;
+                });
+
+                document.addEventListener('mouseup', () => {
+                    if (isDragging) {
+                        isDragging = false;
+                        windowElement.style.transition = 'transform 0.3s ease';
+                        document.body.style.userSelect = 'auto';
+                    }
+                });
+            }
+
+            const mainContent = document.getElementById('main-content-scroll');
+            if (mainContent) {
+                mainContent.addEventListener('wheel', function(e) {
+                   if (mainContent.scrollTop + mainContent.clientHeight >= mainContent.scrollHeight && e.deltaY > 0) {
+                        e.preventDefault();
+                    } else if (mainContent.scrollTop === 0 && e.deltaY < 0) {
+                        e.preventDefault();
+                    }
+                }, { passive: false });
+            }
+             
+            const joinBtn = document.getElementById('join-btn');
+            joinBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const spark = document.createElement('span');
+                spark.classList.add('sparkle-effect');
+                
+                const rect = joinBtn.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                spark.style.left = `${x}px`;
+                spark.style.top = `${y}px`;
+
+                joinBtn.appendChild(spark);
+                setTimeout(() => {
+                    spark.remove();
+                }, 600);
+
+                setTimeout(() => {
+                    window.open('https://forms.gle/pxsu9CVXhushR4cR9', '_blank');
+                }, 200);
+            });
+
+             const dynamicStyle = document.createElement('style');
+             document.head.appendChild(dynamicStyle);
+             dynamicStyle.innerHTML = `
+                .sparkle-effect {
+                    position: absolute;
+                    border-radius: 50%;
+                    width: 30px;
+                    height: 30px;
+                    background-color: white;
+                    animation: sparkle 0.6s ease-out;
+                    pointer-events: none;
+                    transform: translate(-50%, -50%);
+                 }
+
+                @keyframes sparkle {
+                    0% {
+                         opacity: 0.8;
+                         transform: translate(-50%, -50%) scale(0);
+                    }
+                    100% {
+                         opacity: 0;
+                         transform: translate(-50%, -50%) scale(5);
+                    }
+                }
+             `;
+        });
+    </script>
 </body>
 </html>
