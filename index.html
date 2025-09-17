@@ -3,649 +3,441 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLB Anime/Manga - Ngôi Nhà Chung Của Những Tâm Hồn Đồng Điệu</title>
+    <title>CLB Những Người Yêu Thích Anime/Manga</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Roboto:wght@400;500;700&display=swap');
-
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         :root {
-            --background-color: #fce4ec;
-            --main-accent-color: #f8bbd0;
-            --secondary-accent-color: #ffc1e3;
-            --header-bg-color: #e1bee7;
-            --window-bg-color: #ffffff;
-            --text-color: #4e342e;
-            --highlight-text-color: #880e4f;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-            --icon-filter: invert(24%) sepia(16%) saturate(1211%) hue-rotate(314deg) brightness(91%) contrast(86%);
-            --button-bg-color: #ff80ab;
-            --button-hover-bg-color: #f50057;
-            --font-main: 'Roboto', sans-serif;
-            --font-title: 'Mochiy Pop One', sans-serif;
+            --background-color: #ffffff;
+            --text-color: #111111;
+            --primary-color: #3a3a3a;
+            --secondary-color: #f0f0f0;
+            --accent-color: #4f4f4f;
+            --border-color: #e0e0e0;
+            --card-background: #fafafa;
+            --card-border: #f0f0f0;
         }
-
+        html {
+            scroll-behavior: smooth;
+        }
         body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--background-color);
-            background-image:
-                radial-gradient(circle at 1% 1%, rgba(255,255,255,0.2) 1px, transparent 1px),
-                radial-gradient(circle at 99% 99%, rgba(255,255,255,0.2) 1px, transparent 1px),
-                linear-gradient(to bottom, #fde7f0, #fce4ec);
-            font-family: var(--font-main);
             color: var(--text-color);
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            line-height: 1.7;
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
-
-        .desktop-container {
-            width: 100%;
+        .container {
             max-width: 1200px;
-            margin: 2rem;
-            background: linear-gradient(135deg, #fff0f5, #f8e8ee);
-            border: 2px solid #fff;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(220, 150, 180, 0.4);
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            animation: fadeInDesktop 1s ease-out;
-            position: relative;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-        
-        @keyframes fadeInDesktop {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        .header-bar {
-            background-color: var(--header-bg-color);
-            background-image: linear-gradient(to right, #e1bee7, #f48fb1);
-            padding: 10px 20px;
+        .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid white;
-            color: white;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
         }
-
-        .window-title {
-            font-family: var(--font-title);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .navbar-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            text-decoration: none;
+            color: var(--text-color);
+            letter-spacing: -1px;
         }
-
-        .window-title-icon {
-            width: 24px;
-            height: 24px;
+        .navbar-links a {
+            margin-left: 25px;
+            text-decoration: none;
+            color: var(--primary-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
-
-        .window-controls {
-            display: flex;
-            gap: 10px;
-        }
-        .control-btn {
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            border: 1px solid rgba(255,255,255,0.5);
-            cursor: pointer;
-        }
-        .close { background-color: #ff605c; }
-        .minimize { background-color: #ffbd44; }
-        .maximize { background-color: #00ca4e; }
-
-
-        .main-content {
-            padding: 2rem;
-            overflow-y: auto;
-            flex-grow: 1;
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        .title-wrapper {
-            background: linear-gradient(135deg, var(--main-accent-color), var(--secondary-accent-color));
-            border-radius: 12px;
-            padding: 15px 30px;
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--highlight-text-color);
-            box-shadow: 0 4px 15px var(--shadow-color);
-            border: 2px solid white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .club-main-title {
-            font-family: var(--font-title);
-            font-size: 2.5em;
-            margin: 0;
-            padding: 0;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            display: inline-flex;
-            align-items: center;
-        }
-
-        .sparkle {
-            font-size: 0.8em;
-            margin: 0 15px;
-            color: #fff59d;
-            animation: sparkleShine 1.5s infinite alternate;
-        }
-
-        @keyframes sparkleShine {
-            from { text-shadow: 0 0 5px #fff, 0 0 10px #ffeb3b; }
-            to { text-shadow: 0 0 15px #fff, 0 0 25px #ffeb3b, 0 0 5px #fff; }
-        }
-
-        .section {
-            background-color: var(--window-bg-color);
-            margin-bottom: 2rem;
-            padding: 1.5rem 2rem;
-            border-radius: 15px;
-            border: 1px solid #ffffff;
-            box-shadow: 0 8px 16px var(--shadow-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
-        }
-
-        h1, h2, h3 {
-            color: var(--highlight-text-color);
-            font-family: var(--font-main);
-            font-weight: 700;
-        }
-
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            font-size: 1.8em;
-            padding-bottom: 0.75rem;
-            border-bottom: 3px dashed var(--main-accent-color);
-            font-family: var(--font-title);
-            animation: slideInFromLeft 0.8s ease-out;
-        }
-
-        @keyframes slideInFromLeft {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        .icon {
-            width: 32px;
-            height: 32px;
-            filter: var(--icon-filter);
-            transition: transform 0.3s ease;
-        }
-        
-        .section-title:hover .icon {
-            transform: rotate(360deg);
-        }
-
-        p {
-            font-size: 1em;
-            margin-bottom: 1em;
+        .navbar-links a:hover {
             color: var(--text-color);
         }
-
-        .intro-text, .cta-text {
+        .search-icon {
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .header {
+            padding: 80px 0;
             text-align: center;
-            font-size: 1.1em;
-            margin-bottom: 2rem;
         }
-
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 1rem 0;
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+            line-height: 1.1;
         }
-        
-        li {
-            padding: 0.8rem 0 0.8rem 1.5rem;
-            position: relative;
-            transition: background-color 0.2s;
-            border-radius: 8px;
+        .header p {
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+            color: var(--primary-color);
+            font-size: 1.1rem;
         }
-
-        li::before {
-            content: '🌸';
-            position: absolute;
-            left: -5px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.2em;
-            color: #ff8a80;
-            transition: transform 0.3s;
-        }
-
-        li:hover {
-            background-color: #fff9f9;
-        }
-        li:hover::before {
-            transform: translateY(-50%) rotate(360deg);
-        }
-
-        strong {
-            color: var(--highlight-text-color);
-            font-weight: 700;
-        }
-
-        .join-us-container {
-            text-align: center;
-            padding: 2rem;
-            background: linear-gradient(135deg, #ffd1dc, #ffc0cb);
-            border-radius: 12px;
-        }
-
-        .join-us-button {
+        .btn {
             display: inline-block;
-            background-color: var(--button-bg-color);
-            color: white;
-            padding: 18px 36px;
+            padding: 12px 28px;
+            background-color: var(--text-color);
+            color: var(--background-color);
             text-decoration: none;
             border-radius: 50px;
-            font-size: 1.3em;
-            font-weight: 700;
-            text-transform: uppercase;
-            box-shadow: 0 4px 6px rgba(236, 64, 122, 0.4);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-            position: relative;
-            overflow: hidden;
-            border: 2px solid white;
-            font-family: var(--font-title);
+            font-weight: 600;
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
-
-        .join-us-button:before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 300%;
-            height: 300%;
-            background-color: rgba(255, 255, 255, 0.15);
-            transform: translate(-50%, -50%) rotate(45deg);
-            transition: all 0.5s ease;
+        .btn:hover {
+            transform: scale(1.05);
+            background-color: #333;
         }
-
-        .join-us-button:hover {
-            background-color: var(--button-hover-bg-color);
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(236, 64, 122, 0.5);
+        .btn.primary {
+            background-color: var(--text-color);
+            color: var(--background-color);
         }
-
-        .join-us-button:hover:before {
-            width: 0;
-            height: 0;
+        .main-content {
+            padding: 60px 0;
         }
-
-        .footer {
+        .section-title {
             text-align: center;
-            padding: 2rem;
-            margin-top: 1rem;
-            font-size: 0.9em;
-            background-color: #fff0f5;
-            color: #bcaaa4;
-            border-top: 2px solid #fff;
+            margin-bottom: 60px;
         }
-        .footer a {
-            color: #f48fb1;
-            text-decoration: none;
-            transition: color 0.2s;
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 15px;
         }
-        .footer a:hover {
-            text-decoration: underline;
-            color: var(--highlight-text-color);
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            max-width: 600px;
+            margin: 0 auto;
         }
-        
-        .rules-grid {
+        .content-grid {
             display: grid;
-            gap: 1.5rem;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: 1fr;
+            gap: 40px;
         }
-        .rule-card {
-            background: #fffafa;
-            border: 1px dashed var(--main-accent-color);
-            padding: 1rem;
-            border-radius: 10px;
+        .content-card {
+            background-color: var(--card-background);
+            border: 1px solid var(--card-border);
+            padding: 40px;
+            border-radius: 16px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+        .content-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 20px;
             display: flex;
-            flex-direction: column;
-        }
-        .rule-card h3 {
-            font-size: 1.2em;
-            border-bottom: 1px solid #fce4ec;
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .sidebar {
-            position: fixed;
-            left: calc(50% - 620px);
-            top: 20%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            animation: sideBarEnter 1s .5s both;
-        }
-        @keyframes sideBarEnter {
-            from { transform: translateX(-150%); opacity: 0; }
-            to { transform: translateX(0%); opacity: 1; }
-        }
-
-        .sidebar-icon {
-            width: 50px;
-            height: 50px;
-            background-color: white;
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
             align-items: center;
-            cursor: pointer;
-            box-shadow: 0 4px 8px var(--shadow-color);
-            transition: transform .2s;
         }
-        .sidebar-icon:hover {
-            transform: scale(1.1) rotate(5deg);
+        .content-card h3 svg {
+            margin-right: 15px;
         }
-        
-        .sidebar-icon img {
-            width: 60%;
-            height: 60%;
+        .content-card ul {
+            padding-left: 20px;
+            list-style: none;
         }
-
-        @media (max-width: 1400px) {
-            .sidebar {
-                display: none;
-            }
+        .content-card ul li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
         }
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            .desktop-container {
-                margin: 0;
-                border-radius: 10px;
-            }
-            .club-main-title {
-                font-size: 1.8em;
-            }
-            .section-title {
-                font-size: 1.5em;
-            }
-            .main-content {
-                padding: 1.5rem;
-            }
-            .join-us-button {
-                padding: 15px 30px;
-                font-size: 1.1em;
-            }
-            
-        }
-
-        .decorative-elements-container {
+        .content-card ul li::before {
+            content: '✨';
             position: absolute;
-            width: 100%;
-            height: 100%;
+            left: 0;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        .rulebook {
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            margin-top: 80px;
             overflow: hidden;
-            pointer-events: none;
-            top: 0;
+        }
+        .rulebook-header {
+            padding: 30px 40px;
+            background-color: var(--secondary-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .rulebook-header h2 {
+            margin: 0;
+            font-size: 2rem;
+            font-weight: 800;
+        }
+        .rulebook-header p {
+            margin: 5px 0 0 0;
+            color: var(--primary-color);
+        }
+        .rule-section {
+            padding: 30px 40px;
+        }
+        .rule {
+            margin-bottom: 30px;
+        }
+        .rule h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .rule p, .rule ol {
+            color: var(--primary-color);
+        }
+        .rule ol {
+            padding-left: 25px;
+            list-style-type: none;
+        }
+        .rule ol li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        .rule ol li::before {
+            content: "✓";
+            color: var(--accent-color);
+            font-weight: 700;
+            position: absolute;
             left: 0;
         }
-        .deco-star {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            animation: float 6s ease-in-out infinite;
+        .rule span {
+            font-weight: 600;
+            color: var(--text-color);
         }
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            50% { transform: translate(15px, 20px); }
-            100% { transform: translate(0, 0); }
+        .footer {
+            padding: 50px 0;
+            margin-top: 60px;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+            color: var(--primary-color);
         }
-        .star-1 { top: 15%; right: 10%; animation-delay: 0s; }
-        .star-2 { top: 40%; left: 8%; animation-delay: 2s; }
-        .star-3 { bottom: 20%; right: 5%; animation-delay: 4s; }
-        .star-4 { top: 5%; left: 45%; animation-delay: 1s; }
-        .star-5 { bottom: 5%; left: 5%; animation-delay: 3s; }
-
-        .deco-paperclip {
-            position: absolute;
-            right: 25px;
-            top: 250px;
-            width: 45px;
-            transform: rotate(20deg);
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--text-color);
+            margin-bottom: 15px;
         }
-
-        .bottom-bar {
-            background: #ffe0ee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 20px;
-            border-top: 2px solid white;
-            color: #bcaaa4;
-            font-family: var(--font-title);
+        .footer-links {
+            margin-bottom: 20px;
         }
-        .bottom-bar-left, .bottom-bar-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .footer-links a {
+            margin: 0 15px;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
-        .time {
-            font-size: 0.9em;
+        .footer-links a:hover {
+            color: var(--text-color);
         }
-
-        /* Rule Card Icons */
-        #rule1::before {content: "🗺️";font-size: 1.5em;display: block;margin-bottom: 0.5rem;}
-        #rule2::before {content: "👥";font-size: 1.5em;display: block;margin-bottom: 0.5rem;}
-        #rule3::before {content: "📜";font-size: 1.5em;display: block;margin-bottom: 0.5rem;}
-        #rule4::before {content: "⚙️";font-size: 1.5em;display: block;margin-bottom: 0.5rem;}
-
-
+        .footer-contact p {
+            margin: 5px 0;
+        }
+        @media (max-width: 991px) {
+            .header h1 {
+                font-size: 2.8rem;
+            }
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            .content-card, .rulebook-header, .rule-section {
+                padding: 30px;
+            }
+        }
+        @media (max-width: 767px) {
+            body { font-size: 15px; }
+            .navbar { flex-direction: column; gap: 15px; }
+            .navbar-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            .navbar-links a { margin: 0; }
+            .header { padding: 60px 0; }
+            .header h1 { font-size: 2.2rem; }
+            .content-card h3 { font-size: 1.5rem; }
+            .rulebook-header h2 { font-size: 1.6rem; }
+            .rule h4 { font-size: 1.3rem; }
+        }
+        .animated-section {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .animated-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
-    <div class="desktop-container">
-
-        <div class="decorative-elements-container">
-            <svg class="deco-star star-1" viewBox="0 0 24 24"><path fill="#FFD1DC" d="M12,17.27L18.18,21L17,14.64L22,9.73L15.36,8.89L12,3L8.64,8.89L2,9.73L7,14.64L5.82,21L12,17.27Z" /></svg>
-            <svg class="deco-star star-2" viewBox="0 0 24 24"><path fill="#E1BEE7" d="M12,17.27L18.18,21L17,14.64L22,9.73L15.36,8.89L12,3L8.64,8.89L2,9.73L7,14.64L5.82,21L12,17.27Z" /></svg>
-            <svg class="deco-star star-3" viewBox="0 0 24 24"><path fill="#FFF59D" d="M12,17.27L18.18,21L17,14.64L22,9.73L15.36,8.89L12,3L8.64,8.89L2,9.73L7,14.64L5.82,21L12,17.27Z" /></svg>
-             <svg class="deco-star star-4" viewBox="0 0 24 24"><path fill="#E1BEE7" d="M12,17.27L18.18,21L17,14.64L22,9.73L15.36,8.89L12,3L8.64,8.89L2,9.73L7,14.64L5.82,21L12,17.27Z" /></svg>
-            <svg class="deco-star star-5" viewBox="0 0 24 24"><path fill="#FFD1DC" d="M12,17.27L18.18,21L17,14.64L22,9.73L15.36,8.89L12,3L8.64,8.89L2,9.73L7,14.64L5.82,21L12,17.27Z" /></svg>
+    <header class="navbar container">
+        <a href="#" class="navbar-logo">ANIME/MANGA FANCLUB</a>
+        <div class="navbar-links">
+            <a href="#welcome">Giới thiệu</a>
+            <a href="#benefits">Quyền lợi</a>
+            <a href="#rules">Nội quy</a>
+            <a href="#contact">Liên hệ</a>
         </div>
-
-
-        <header class="header-bar">
-            <div class="window-title">
-                 <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='%23fff' d='M12 2a10 10 0 100 20 10 10 0 000-20zm-2 15l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z'/%3E%3C/svg%3E" alt="Peach Icon" class="window-title-icon"/> PEACHYKAWAII.CLUB
-            </div>
-            <div class="window-controls">
-                <span class="control-btn minimize"></span>
-                <span class="control-btn maximize"></span>
-                <span class="control-btn close"></span>
-            </div>
-        </header>
-
-        <main class="main-content">
-            
-            <div class="title-wrapper">
-                <h1 class="club-main-title"><span class="sparkle">✨</span>ĐƠN ĐĂNG KÍ VÀO CLB ANIME/MANGA<span class="sparkle">✨</span></h1>
-            </div>
-
-            <section class="section">
-                <h2 class="section-title">
-                     <svg class="icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92c-.93.93-1.61 2.05-1.57 3.32h-1.12c-.06-1.55.57-2.92 1.57-3.92l.99-.99c.35-.35.53-.78.53-1.28 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>CHÀO MỪNG BẠN ĐẾN VỚI CLB!</h2>
-                <p class="intro-text">
-                    Bạn có phải là người "cháy" hết mình với từng khung hình anime đẹp mắt? Bạn có thể "mất ăn mất ngủ" để theo dõi chương manga mới nhất? Bạn có muốn tìm một nơi để cùng "chiến hữu" bàn luận về những isekai đỉnh cao, những trận chiến shounen nảy lửa, hay những câu chuyện tình shoujo ngọt ngào?
-                </p>
-                <p>Đây không chỉ là một câu lạc bộ, đây là "thánh địa" nơi những tâm hồn đồng điệu tìm thấy nhau, là nơi chúng ta cùng nhau khám phá và tôn vinh nền văn hóa 2D đặc sắc của Nhật Bản. Gia nhập cùng chúng mình, bạn sẽ được:</p>
-                <ul>
-                    <li>🎬 <strong>Thưởng thức Anime:</strong> Cùng nhau xem những tập đầu tiên của các bộ anime hot nhất mùa, những movie kinh điển, và cả những "siêu phẩm" ẩn mình mà bạn có thể đã bỏ lỡ.</li>
-                    <li>📚 <strong>Chìm đắm trong Manga & Light Novel:</strong> Chia sẻ và giới thiệu những bộ manga, light novel tâm đắc. Cùng nhau phân tích những "plot twist" hack não và những nhân vật có chiều sâu.</li>
-                    <li>🎨 <strong>Giao lưu & Sáng tạo:</strong> Tham gia các buổi workshop vẽ fanart, các cuộc thi cosplay mini, hoặc đơn giản là cùng nhau sáng tạo nên những câu chuyện của riêng mình.</li>
-                    <li>🧠 <strong>Đấu trí & Giải trí:</strong> "Đốt cháy nơ-ron" với những trận đấu trivia về thế giới anime/manga, các trò chơi board game phong cách Nhật Bản và vô vàn hoạt động vui nhộn khác.</li>
-                    <li>🌸 <strong>Khám phá Văn hóa Nhật Bản:</strong> Không chỉ anime/manga, chúng ta sẽ cùng tìm hiểu về ẩm thực, lễ hội, âm nhạc (J-Pop, anison), và những nét văn hóa thú vị khác của xứ sở hoa anh đào.</li>
-                </ul>
-                <p>Bất kể bạn là một <strong>"wibu"</strong> chính hiệu hay chỉ là người mới bắt đầu tò mò về thế giới này, chỉ cần bạn có tình yêu với anime/manga, hãy về với "ngôi nhà" của chúng mình!</p>
-            </section>
-            
-            <section class="section">
-                 <h2 class="section-title">
-                 <svg class="icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M19.49 13.79L18 10l-1.49 3.79L12.72 15l3.79 1.49L18 20l1.49-3.79L23.28 15M6.35 6.09l-1.8 1.83 5.48 5.48-5.32 5.32 1.8 1.8 5.32-5.32 5.48 5.48 1.8-1.8-5.48-5.48L19.46 6.09l-1.8-1.8L12.3 9.61z"></path></svg>
-                 NỘI QUY SINH HOẠT</h2>
-                 <div class="rules-grid">
-                     <div id="rule1" class="rule-card">
-                         <h3>Mục đích - Tôn chỉ</h3>
-                         <p>Tạo ra một sân chơi chung, một "thế giới song song" lành mạnh, sáng tạo và đầy đam mê cho tất cả những trái tim yêu thích văn hóa Anime/Manga. Thúc đẩy tinh thần học hỏi, chia sẻ và giao lưu văn hóa Nhật Bản. Xây dựng một cộng đồng gắn kết, nơi mỗi thành viên có thể tự do thể hiện cá tính.</p>
-                     </div>
-                      <div id="rule2" class="rule-card">
-                         <h3>Đối tượng và phạm vi</h3>
-                         <p>Áp dụng cho toàn thể Thành viên chính thức, Cộng tác viên của CLB, và tất cả Khách mời tham dự các sự kiện do CLB tổ chức.</p>
-                     </div>
-                      <div id="rule3" class="rule-card">
-                         <h3>Quy tắc ứng xử chung</h3>
-                         <p>Hoạt động dựa trên tinh thần <strong>đam mê - tự nguyện - tôn trọng - đoàn kết - công bằng và văn minh</strong>. Thành viên có trách nhiệm tham gia và đóng góp. Luôn lịch sự, không "toxic", và đặc biệt, không "spoiler" trắng trợn!</p>
-                     </div>
-                      <div id="rule4" class="rule-card">
-                         <h3>Tổ chức thực hiện</h3>
-                         <p>Ban Quản lý có trách nhiệm phổ biến và thực hiện nội quy. Mọi thành viên cùng nhau giám sát và xây dựng CLB. Mọi vi phạm sẽ được xử lý để giữ gìn môi trường chung lành mạnh.</p>
-                     </div>
-                 </div>
-            </section>
-
-            <div class="join-us-container">
-                <p class="cta-text">Cùng nhau, chúng ta sẽ tạo nên một thế giới 2D sống động hơn bao giờ hết!</p>
-                <button onclick="window.open('https://forms.gle/pxsu9CVXhushR4cR9', '_blank')" class="join-us-button">
-                    Tham Gia Ngay!
-                </button>
-            </div>
-        </main>
-
-        <footer class="footer">
-            <p>Liên hệ với chúng tôi: <a href="mailto:admin@aniw.xyz">admin@aniw.xyz</a></p>
-            <p>&copy; 2025 CLB Những người yêu thích Anime/Manga. With Love. 💖</p>
-        </footer>
-
-        <div class="bottom-bar">
-             <div class="bottom-bar-left">
-                  <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24' fill='%23F48FB1'%3E%3Cpath d='M12 3a9 9 0 00-9 9c0 1.25.26 2.45.74 3.53a9 9 0 0013.06-9.06A8.93 8.93 0 0012 3z M6.12 18a7 7 0 118.89 3.06A6.97 6.97 0 016.12 18z'/%3E%3C/svg%3E" alt="Peach Start"/>
-                 <span>P EACH</span>
-             </div>
-             <div class="bottom-bar-right">
-                  <span class="time" id="clock">10:00 PM</span>
-             </div>
+        <div class="search-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
         </div>
+    </header>
 
-    </div>
+    <main class="main-content">
+        <section class="header container">
+            <h1 class="animated-section">ĐƠN ĐĂNG KÍ VÀO CLB ANIME/MANGA</h1>
+            <p class="animated-section" style="transition-delay: 0.1s;">Bạn có phải là người "cháy" hết mình với từng khung hình anime đẹp mắt? Bạn có thể "mất ăn mất ngủ" để theo dõi chương manga mới nhất? Chào mừng bạn đến với ngôi nhà chung của chúng ta!</p>
+            <a href="https://forms.gle/pxsu9CVXhushR4cR9" target="_blank" class="btn primary animated-section" style="transition-delay: 0.2s;">Tham gia ngay</a>
+        </section>
+
+        <section id="welcome" class="container animated-section">
+            <div class="section-title">
+                <h2>CHÀO MỪNG BẠN ĐẾN VỚI CLB!</h2>
+                <p>Đây không chỉ là một câu lạc bộ, đây là "thánh địa" nơi những tâm hồn đồng điệu tìm thấy nhau, là nơi chúng ta cùng nhau khám phá và tôn vinh nền văn hóa 2D đặc sắc của Nhật Bản.</p>
+            </div>
+        </section>
+
+        <section id="benefits" class="container animated-section">
+             <div class="content-card">
+                 <h3>
+                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                         <path d="M22 10V15C22 20 20 22 15 22H9C4 22 2 20 2 15V9C2 4 4 2 9 2H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                         <path d="M22 10H18C15 10 14 9 14 6V2L22 10Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                         <path d="M7 13.01L7.01 12.999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                         <path d="M11 13.01L11.01 12.999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                         <path d="M7 17.01L7.01 16.999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                         <path d="M11 17.01L11.01 16.999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                     </svg>
+                     Gia nhập cùng chúng mình, bạn sẽ được:
+                 </h3>
+                 <ul>
+                     <li>
+                         <strong>🎬 Thưởng thức Anime:</strong> Cùng nhau xem những tập đầu tiên của các bộ anime hot nhất mùa, những movie kinh điển, và cả những "siêu phẩm" ẩn mình mà bạn có thể đã bỏ lỡ.
+                     </li>
+                     <li>
+                         <strong>📚 Chìm đắm trong Manga & Light Novel:</strong> Chia sẻ và giới thiệu những bộ manga, light novel tâm đắc. Cùng nhau phân tích những "plot twist" hack não và những nhân vật có chiều sâu.
+                     </li>
+                     <li>
+                         <strong>🎨 Giao lưu & Sáng tạo:</strong> Tham gia các buổi workshop vẽ fanart, các cuộc thi cosplay mini, hoặc đơn giản là cùng nhau sáng tạo nên những câu chuyện của riêng mình.
+                     </li>
+                     <li>
+                         <strong>🧠 Đấu trí & Giải trí:</strong> "Đốt cháy nơ-ron" với những trận đấu trivia về thế giới anime/manga, các trò chơi board game phong cách Nhật Bản và vô vàn hoạt động vui nhộn khác.
+                     </li>
+                     <li>
+                         <strong>🌸 Khám phá Văn hóa Nhật Bản:</strong> Không chỉ anime/manga, chúng ta sẽ cùng tìm hiểu về ẩm thực, lễ hội, âm nhạc (J-Pop, anison), và những nét văn hóa thú vị khác của xứ sở hoa anh đào.
+                     </li>
+                 </ul>
+                 <p style="text-align: center; margin-top: 30px;">Bất kể bạn là một "wibu" chính hiệu hay chỉ là người mới bắt đầu tò mò về thế giới này, chỉ cần bạn có tình yêu với anime/manga, hãy về với "ngôi nhà" của chúng mình!</p>
+             </div>
+        </section>
+
+        <section id="rules" class="container animated-section">
+            <div class="rulebook">
+                <div class="rulebook-header">
+                    <h2>✨ NỘI QUY SINH HOẠT ✨</h2>
+                    <p>Câu lạc bộ Người Yêu Thích Anime/Manga</p>
+                </div>
+                <div class="rule-section">
+                    <div class="rule">
+                        <h4>
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 3V21" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.89 19.5C18.4239 17.5134 18.7303 15.3411 18.75 13.12C18.7303 10.8989 18.4239 8.72661 17.89 6.74L6.11 17.26C6.57463 17.7011 7.10659 18.0673 7.68 18.35C8.89506 18.9642 10.3238 19.3444 11.96 19.49" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.11 6.74C5.57608 8.72661 5.26974 10.8989 5.25 13.12C5.26974 15.3411 5.57608 17.5134 6.11 19.5L17.89 8.98C17.4254 8.5389 16.8934 8.17267 16.32 7.89C15.1049 7.27576 13.6762 6.89557 12.04 6.75" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            Điều 1: Mục đích - Tôn chỉ
+                        </h4>
+                        <p>Tạo ra một sân chơi chung, một "thế giới song song" lành mạnh, sáng tạo và đầy đam mê cho tất cả những trái tim yêu thích văn hóa Anime/Manga, đồng thời xây dựng một cộng đồng gắn kết và văn minh.</p>
+                    </div>
+                    <div class="rule">
+                        <h4>
+                           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.11 10.83L14.53 13.41L12.55 11.43L15.13 8.85002C16.66 7.32002 17.92 7.82002 18.66 8.56002C19.4 9.30002 18.9 10.56 17.41 12.05L14.83 14.63L12.45 12.25L10.37 14.33L7.14 11.1L3 15.24V19.38C3 21.04 4.14 22.18 5.79 22.18H9.93L13.16 19.01L15.68 21.53C16.4 22.25 17.56 22.25 18.28 21.53L20.42 19.39C21.14 18.67 21.14 17.51 20.42 16.79L18.57 14.94L17.11 10.83ZM4.83999 10.98L7.41999 8.4L11.56 12.54L8.93999 15.16C8.21999 15.88 7.39999 16.29 6.40999 16.29C4.54999 16.29 3.01999 14.76 3.01999 12.9C3.01999 11.91 3.42999 11.7 4.83999 10.98Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 5.86C21.2 4.67 22.18 4.29 22.18 3C22.18 1.48 20.67 0 19.12 0C17.53 0 16.14 1.77 17.52 3.14L18.42 4.04" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                           Điều 3: Quy tắc ứng xử chung ("Luật Bất Thành Văn")
+                        </h4>
+                        <ol>
+                            <li><span>Tinh thần chung:</span> Hoạt động của CLB dựa trên tinh thần <span>đam mê, tự nguyện, tôn trọng, đoàn kết, công bằng</span> và <span>văn minh</span>.</li>
+                            <li><span>Tham gia & Trách nhiệm:</span> Thành viên có trách nhiệm tham gia các buổi sinh hoạt định kỳ. Nếu vắng mặt, vui lòng báo trước cho Ban Quản lý.</li>
+                            <li><span>Văn hóa giao tiếp:</span> Luôn giữ thái độ lịch sự, hòa đồng. "Tôn trọng gu của nhau, không toxic". Thảo luận văn minh, không công kích cá nhân.</li>
+                            <li><span>NGHIÊM CẤM SPOILER:</span> Không "spoiler" trắng trợn khi chưa có sự đồng ý hoặc cảnh báo. Hãy là một người "spoiler có tâm"!</li>
+                            <li><span>Trong sự kiện:</span> Giữ gìn vệ sinh, trật tự. CẤM các hành vi thiếu văn hóa, trái pháp luật.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="contact" class="footer container animated-section">
+        <div class="footer-logo">Ani-Manga Club</div>
+        <div class="footer-content">
+            <p>CÙNG NHAU, CHÚNG TA SẼ TẠO NÊN MỘT THẾ GIỚI 2D SỐNG ĐỘNG HƠN BAO GIỜ HẾT!</p>
+            <div class="footer-contact">
+                <p>Mọi thắc mắc và góp ý, xin vui lòng liên hệ:</p>
+                <p><strong>admin@aniw.xyz</strong></p>
+            </div>
+             <a href="https://forms.gle/pxsu9CVXhushR4cR9" target="_blank" class="btn primary animated-section" style="transition-delay: 0.2s;">Tham gia ngay</a>
+        </div>
+    </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', (event) => {
-
-            function updateTime() {
-                const now = new Date();
-                let hours = now.getHours();
-                const minutes = now.getMinutes().toString().padStart(2, '0');
-                const ampm = hours >= 12 ? 'PM' : 'AM';
-                hours = hours % 12;
-                hours = hours ? hours : 12; 
-                const currentTime = `${hours}:${minutes} ${ampm}`;
-                const clockElement = document.getElementById('clock');
-                if (clockElement) {
-                     clockElement.textContent = currentTime;
-                }
-            }
-
-            setInterval(updateTime, 1000);
-            updateTime();
-
-            const sections = document.querySelectorAll('.section, .join-us-container');
-
-            const observer = new IntersectionObserver(entries => {
+        document.addEventListener("DOMContentLoaded", function() {
+            const animatedSections = document.querySelectorAll('.animated-section');
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                        observer.unobserve(entry.target);
+                        entry.target.classList.add('is-visible');
                     }
                 });
             }, {
                 threshold: 0.1
             });
-
-            sections.forEach(section => {
-                section.style.opacity = '0';
-                section.style.transform = 'translateY(20px)';
-                section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            animatedSections.forEach(section => {
                 observer.observe(section);
             });
-            
-            document.querySelectorAll('.join-us-button, .sidebar-icon').forEach(item => {
-                item.addEventListener('click', function(e){
-                     let x = e.clientX - e.target.offsetLeft;
-                     let y = e.clientY - e.target.offsetTop;
-                     
-                     let ripples = document.createElement('span');
-                     ripples.style.left = x + 'px';
-                     ripples.style.top = y + 'px';
-                     
-                    
-                     this.appendChild(ripples);
-                     
-                     setTimeout(() => {
-                         ripples.remove()
-                     },1000);
-                 });
-            });
-
-
-            const desktopContainer = document.querySelector('.desktop-container');
-
-            function createFallingPetal() {
-                const petal = document.createElement('div');
-                petal.innerHTML = '🌸';
-                petal.style.position = 'absolute';
-                petal.style.fontSize = Math.random() * 15 + 10 + 'px';
-                petal.style.top = '-20px';
-                petal.style.left = Math.random() * 100 + 'vw';
-                petal.style.animation = `fall ${Math.random() * 5 + 5}s linear infinite`;
-                petal.style.userSelect = 'none';
-                petal.style.pointerEvents = 'none';
-                 desktopContainer.appendChild(petal);
-
-                setTimeout(() => {
-                    petal.remove();
-                }, 10000);
-            }
-            if(window.innerWidth > 768){
-                setInterval(createFallingPetal, 500);
-            }
-
-            const keyframes = `
-                @keyframes fall {
-                    to {
-                        transform: translateY(105vh) rotate(${Math.random() * 360}deg);
-                        opacity: 0;
+            const navLinks = document.querySelectorAll('.navbar-links a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                         const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset - 80;
+                         window.scrollTo({
+                             top: offsetTop,
+                             behavior: 'smooth'
+                         });
                     }
-                }`;
-
-            const styleSheet = document.createElement("style");
-            styleSheet.innerText = keyframes;
-            document.head.appendChild(styleSheet);
-
-
+                });
+            });
+            let lastScrollTop = 0;
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener("scroll", function() {
+                let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                if (currentScroll > lastScrollTop && lastScrollTop > 100) {
+                    navbar.style.top = "-100px"; 
+                } else {
+                    navbar.style.top = "0";
+                }
+                lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+            }, false);
         });
     </script>
 </body>
