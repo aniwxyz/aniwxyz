@@ -1,444 +1,229 @@
 <!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CLB Những Người Yêu Thích Anime/Manga</title>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anime Streaming</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              'theme-lightest': 'var(--theme-lightest)',
+              'theme-mint': 'var(--theme-mint)',
+              'theme-lime': 'var(--theme-lime)',
+              'theme-olive': 'var(--theme-olive)',
+              'theme-darkest': 'var(--theme-darkest)',
+            }
+          }
+        }
+      }
+    </script>
+    <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+    "react/": "https://esm.sh/react@18.2.0/",
+    "react": "https://esm.sh/react@18.2.0"
+  }
+}
+</script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Lato:ital,wght@0,400;0,700;1,400&family=Merriweather:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;500;700;800&family=Nunito:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Open+Sans:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Poppins:wght@400;500;700;800&family=Roboto:wght@400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-        :root {
-            --background-color: #ffffff;
-            --text-color: #111111;
-            --primary-color: #3a3a3a;
-            --secondary-color: #f0f0f0;
-            --accent-color: #4f4f4f;
-            --border-color: #e0e0e0;
-            --card-background: #fafafa;
-            --card-border: #f0f0f0;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            font-size: 16px;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .navbar-logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            text-decoration: none;
-            color: var(--text-color);
-            letter-spacing: -1px;
-        }
-        .navbar-links a {
-            margin-left: 25px;
-            text-decoration: none;
-            color: var(--primary-color);
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        .navbar-links a:hover {
-            color: var(--text-color);
-        }
-        .search-icon {
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 50%;
-            background-color: var(--secondary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .header {
-            padding: 80px 0;
-            text-align: center;
-        }
-        .header h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: -2px;
-            line-height: 1.1;
-        }
-        .header p {
-            max-width: 700px;
-            margin: 0 auto 30px auto;
-            color: var(--primary-color);
-            font-size: 1.1rem;
-        }
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            background-color: var(--text-color);
-            color: var(--background-color);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-        }
-        .btn:hover {
-            transform: scale(1.05);
-            background-color: #333;
-        }
-        .btn.primary {
-            background-color: var(--text-color);
-            color: var(--background-color);
-        }
-        .main-content {
-            padding: 60px 0;
-        }
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        .section-title h2 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-        }
-        .section-title p {
-            font-size: 1.1rem;
-            color: var(--primary-color);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .content-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-        }
-        .content-card {
-            background-color: var(--card-background);
-            border: 1px solid var(--card-border);
-            padding: 40px;
-            border-radius: 16px;
-            transition: box-shadow 0.3s ease, transform 0.3s ease;
-        }
-        .content-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
-        }
-        .content-card h3 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-top: 0;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-        }
-        .content-card h3 svg {
-            margin-right: 15px;
-        }
-        .content-card ul {
-            padding-left: 20px;
-            list-style: none;
-        }
-        .content-card ul li {
-            margin-bottom: 15px;
-            padding-left: 30px;
-            position: relative;
-        }
-        .content-card ul li::before {
-            content: '✨';
-            position: absolute;
-            left: 0;
-            font-size: 1.2rem;
-            line-height: 1.6;
-        }
-        .rulebook {
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            margin-top: 80px;
-            overflow: hidden;
-        }
-        .rulebook-header {
-            padding: 30px 40px;
-            background-color: var(--secondary-color);
-            border-bottom: 1px solid var(--border-color);
-        }
-        .rulebook-header h2 {
-            margin: 0;
-            font-size: 2rem;
-            font-weight: 800;
-        }
-        .rulebook-header p {
-            margin: 5px 0 0 0;
-            color: var(--primary-color);
-        }
-        .rule-section {
-            padding: 30px 40px;
-        }
-        .rule {
-            margin-bottom: 30px;
-        }
-        .rule h4 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .rule p, .rule ol {
-            color: var(--primary-color);
-        }
-        .rule ol {
-            padding-left: 25px;
-            list-style-type: none;
-        }
-        .rule ol li {
-            position: relative;
-            padding-left: 25px;
-            margin-bottom: 10px;
-        }
-        .rule ol li::before {
-            content: "✓";
-            color: var(--accent-color);
-            font-weight: 700;
-            position: absolute;
-            left: 0;
-        }
-        .rule span {
-            font-weight: 600;
-            color: var(--text-color);
-        }
-        .footer {
-            padding: 50px 0;
-            margin-top: 60px;
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-            color: var(--primary-color);
-        }
-        .footer-logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--text-color);
-            margin-bottom: 15px;
-        }
-        .footer-links {
-            margin-bottom: 20px;
-        }
-        .footer-links a {
-            margin: 0 15px;
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        .footer-links a:hover {
-            color: var(--text-color);
-        }
-        .footer-contact p {
-            margin: 5px 0;
-        }
-        @media (max-width: 991px) {
-            .header h1 {
-                font-size: 2.8rem;
-            }
-            .section-title h2 {
-                font-size: 2rem;
-            }
-            .content-card, .rulebook-header, .rule-section {
-                padding: 30px;
-            }
-        }
-        @media (max-width: 767px) {
-            body { font-size: 15px; }
-            .navbar { flex-direction: column; gap: 15px; }
-            .navbar-links {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 15px;
-            }
-            .navbar-links a { margin: 0; }
-            .header { padding: 60px 0; }
-            .header h1 { font-size: 2.2rem; }
-            .content-card h3 { font-size: 1.5rem; }
-            .rulebook-header h2 { font-size: 1.6rem; }
-            .rule h4 { font-size: 1.3rem; }
-        }
-        .animated-section {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .animated-section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+      :root,
+      :root[data-theme='green-screen'] {
+        --font-family: 'Inter', sans-serif;
+        --theme-lightest: #F4FFFC;
+        --theme-mint: #91EAAF;
+        --theme-lime: #C3E956;
+        --theme-olive: #4D7111;
+        --theme-darkest: #1F4B2C;
+      }
+      :root[data-theme='retro-magic'] {
+        --theme-lightest: #FFF7AD;
+        --theme-mint: #FFB3AE;
+        --theme-lime: #FF49C1;
+        --theme-olive: #6A1452;
+        --theme-darkest: #44113E;
+      }
+      :root[data-theme='coral-wave'] {
+        --theme-lightest: #FCEDD8;
+        --theme-mint: #FFD464;
+        --theme-lime: #FF5E5E;
+        --theme-olive: #E23C64;
+        --theme-darkest: #B0183D;
+      }
+      :root[data-theme='deep-space'] {
+        --theme-lightest: #BB63FF;
+        --theme-mint: #5B58EB;
+        --theme-lime: #56E1E9;
+        --theme-olive: #112C71;
+        --theme-darkest: #0A2353;
+      }
+      :root[data-theme='jade-horizon'] {
+        --theme-lightest: #E6F5E7;
+        --theme-mint: #B7E5BA;
+        --theme-lime: #5CA87C;
+        --theme-olive: #288760;
+        --theme-darkest: #1A5140; 
+      }
+      :root[data-theme='sunny-attitude'] {
+        --theme-lightest: #FEEAF0;
+        --theme-mint: #F0D0C7;
+        --theme-lime: #F09410;
+        --theme-olive: #BC430D;
+        --theme-darkest: #241705;
+      }
+      :root[data-theme='misty-forest'] {
+        --theme-lightest: #F2E0DF;
+        --theme-mint: #BDCDCF;
+        --theme-lime: #E3B8B8;
+        --theme-olive: #034C36;
+        --theme-darkest: #003332;
+      }
+      :root[data-theme='cyber-glow'] {
+        --theme-lightest: #FFE5F1;
+        --theme-mint: #87F5F5;
+        --theme-lime: #F042FF;
+        --theme-olive: #7226FF;
+        --theme-darkest: #160078;
+      }
+      :root[data-theme='glass-ui'] {
+        --theme-lightest: #ffffff;
+        --theme-mint: #ACD6FF;
+        --theme-lime: #FF708C;
+        --theme-olive: #8969FF;
+        --theme-darkest: #101222;
+      }
+      :root[data-theme='liquid-glass'] {
+        --theme-lightest: #f0f8ff;
+        --theme-mint: #89cff0;
+        --theme-lime: #a0e9ff;
+        --theme-olive: #5f9ea0;
+        --theme-darkest: #003366;
+      }
+      :root[data-theme='oceanic-blue'] {
+        --theme-lightest: #D6E8EE;
+        --theme-mint: #97CADB;
+        --theme-lime: #018ABE;
+        --theme-olive: #02457A;
+        --theme-darkest: #001B48;
+      }
+      :root[data-theme='unicorn'] {
+        --theme-lightest: #ECFDFF;
+        --theme-mint: #41F0D1;
+        --theme-lime: #A8FFC8;
+        --theme-olive: #008B8B;
+        --theme-darkest: #012A29;
+      }
+      :root[data-theme='sky-glider'] {
+        --theme-lightest: #E6F3FF;
+        --theme-mint: #62BDFF;
+        --theme-lime: #A08FFF;
+        --theme-olive: #3D10BD;
+        --theme-darkest: #0D033A;
+      }
+
+      html[data-theme='glass-ui'].light body, 
+      html[data-theme='glass-ui'].dark body {
+        background: linear-gradient(160deg, #a7d7ff 0%, #ff708c 50%, #8969ff 100%);
+        background-attachment: fixed;
+        background-size: 300% 300%;
+        animation: gradient-animation 20s ease infinite;
+      }
+      
+      html[data-theme='liquid-glass'].light body, 
+      html[data-theme='liquid-glass'].dark body {
+        background: linear-gradient(-45deg, var(--theme-darkest), var(--theme-olive), var(--theme-mint), var(--theme-lime));
+        background-attachment: fixed;
+        background-size: 400% 400%;
+        animation: gradient-animation 15s ease infinite;
+      }
+
+      html[data-theme='glass-ui'].dark,
+      html[data-theme='liquid-glass'].dark {
+        color: #EAE8FF;
+      }
+       html[data-theme='glass-ui'].light,
+       html[data-theme='liquid-glass'].light {
+        color: #101222;
+      }
+
+      @keyframes gradient-animation {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+      }
+
+      .glass-card {
+        background: rgba(255, 255, 255, 0.35) !important;
+        backdrop-filter: blur(30px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.6) !important;
+        box-shadow: 0 10px 35px 0 rgba(31, 38, 135, 0.2) !important;
+      }
+      
+      .dark .glass-card {
+        background: rgba(20, 22, 40, 0.6) !important;
+        backdrop-filter: blur(30px) saturate(180%) !important;
+        -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+        border: 1px solid rgba(255, 255, 255, 0.18) !important;
+        box-shadow: 0 10px 35px 0 rgba(0, 0, 0, 0.35) !important;
+      }
+      
+      @keyframes liquid-1 {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        25% { transform: translate(10vw, 20vh) scale(1.2); }
+        50% { transform: translate(-20vw, -15vh) scale(0.8); }
+        75% { transform: translate(15vw, -25vh) scale(1.1); }
+      }
+      @keyframes liquid-2 {
+        0%, 100% { transform: translate(0, 0) scale(1.1); }
+        25% { transform: translate(-25vw, 10vh) scale(0.9); }
+        50% { transform: translate(10vw, -10vh) scale(1.3); }
+        75% { transform: translate(-15vw, 20vh) scale(1); }
+      }
+      @keyframes liquid-3 {
+        0%, 100% { transform: translate(0, 0) scale(0.9); }
+        25% { transform: translate(20vw, -15vh) scale(1.2); }
+        50% { transform: translate(-10vw, 20vh) scale(1); }
+        75% { transform: translate(-20vw, -20vh) scale(1.1); }
+      }
+
+      .animate-liquid-1 { animation: liquid-1 30s ease-in-out infinite; }
+      .animate-liquid-2 { animation: liquid-2 35s ease-in-out infinite alternate; }
+      .animate-liquid-3 { animation: liquid-3 40s ease-in-out infinite; }
+
+      body {
+        font-family: var(--font-family);
+        transition: background-color 0.3s, color 0.3s;
+      }
+      
+      .text-bolder p, .text-bolder span, .text-bolder li, .text-bolder button, .text-bolder div:not(:has(> h1, > h2, >h3, >h4)) {
+        font-weight: 500 !important;
+      }
+      .text-bolder h1, .text-bolder h2, .text-bolder h3, .text-bolder h4 {
+        font-weight: 800 !important;
+      }
+      .text-bolder svg {
+        font-weight: normal !important;
+      }
+      .text-italic p, .text-italic span, .text-italic li, .text-italic button, .text-italic div:not(:has(> h1, > h2, >h3, >h4)) {
+        font-style: italic !important;
+      }
+      .text-italic h1, .text-italic h2, .text-italic h3, .text-italic h4, .text-italic svg, .text-italic [class*="font-mono"] {
+        font-style: normal !important;
+      }
     </style>
 </head>
-<body>
-    <header class="navbar container">
-        <a href="#" class="navbar-logo">ANIME/MANGA FANCLUB</a>
-        <div class="navbar-links">
-            <a href="#welcome">Giới thiệu</a>
-            <a href="#benefits">Quyền lợi</a>
-            <a href="#rules">Nội quy</a>
-            <a href="#contact">Liên hệ</a>
-        </div>
-        <div class="search-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </div>
-    </header>
-
-    <main class="main-content">
-        <section class="header container">
-            <h1 class="animated-section">ĐƠN ĐĂNG KÍ VÀO CLB ANIME/MANGA</h1>
-            <p class="animated-section" style="transition-delay: 0.1s;">Bạn có phải là người "cháy" hết mình với từng khung hình anime đẹp mắt? Bạn có thể "mất ăn mất ngủ" để theo dõi chương manga mới nhất? Chào mừng bạn đến với ngôi nhà chung của chúng ta!</p>
-            <a href="https://forms.gle/pxsu9CVXhushR4cR9" target="_blank" class="btn primary animated-section" style="transition-delay: 0.2s;">Tham gia ngay</a>
-        </section>
-
-        <section id="welcome" class="container animated-section">
-            <div class="section-title">
-                <h2>CHÀO MỪNG BẠN ĐẾN VỚI CLB!</h2>
-                <p>Đây không chỉ là một câu lạc bộ, đây là "thánh địa" nơi những tâm hồn đồng điệu tìm thấy nhau, là nơi chúng ta cùng nhau khám phá và tôn vinh nền văn hóa 2D đặc sắc của Nhật Bản.</p>
-            </div>
-        </section>
-
-        <section id="benefits" class="container animated-section">
-             <div class="content-card">
-                 <h3>
-                     <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                         <path d="M22 10V15C22 20 20 22 15 22H9C4 22 2 20 2 15V9C2 4 4 2 9 2H14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                         <path d="M22 10H18C15 10 14 9 14 6V2L22 10Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                         <path d="M7 13.01L7.01 12.999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                         <path d="M11 13.01L11.01 12.999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                         <path d="M7 17.01L7.01 16.999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                         <path d="M11 17.01L11.01 16.999" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                     </svg>
-                     Gia nhập cùng chúng mình, bạn sẽ được:
-                 </h3>
-                 <ul>
-                     <li>
-                         <strong>🎬 Thưởng thức Anime:</strong> Cùng nhau xem những tập đầu tiên của các bộ anime hot nhất mùa, những movie kinh điển, và cả những "siêu phẩm" ẩn mình mà bạn có thể đã bỏ lỡ.
-                     </li>
-                     <li>
-                         <strong>📚 Chìm đắm trong Manga & Light Novel:</strong> Chia sẻ và giới thiệu những bộ manga, light novel tâm đắc. Cùng nhau phân tích những "plot twist" hack não và những nhân vật có chiều sâu.
-                     </li>
-                     <li>
-                         <strong>🎨 Giao lưu & Sáng tạo:</strong> Tham gia các buổi workshop vẽ fanart, các cuộc thi cosplay mini, hoặc đơn giản là cùng nhau sáng tạo nên những câu chuyện của riêng mình.
-                     </li>
-                     <li>
-                         <strong>🧠 Đấu trí & Giải trí:</strong> "Đốt cháy nơ-ron" với những trận đấu trivia về thế giới anime/manga, các trò chơi board game phong cách Nhật Bản và vô vàn hoạt động vui nhộn khác.
-                     </li>
-                     <li>
-                         <strong>🌸 Khám phá Văn hóa Nhật Bản:</strong> Không chỉ anime/manga, chúng ta sẽ cùng tìm hiểu về ẩm thực, lễ hội, âm nhạc (J-Pop, anison), và những nét văn hóa thú vị khác của xứ sở hoa anh đào.
-                     </li>
-                 </ul>
-                 <p style="text-align: center; margin-top: 30px;">Bất kể bạn là một "wibu" chính hiệu hay chỉ là người mới bắt đầu tò mò về thế giới này, chỉ cần bạn có tình yêu với anime/manga, hãy về với "ngôi nhà" của chúng mình!</p>
-             </div>
-        </section>
-
-        <section id="rules" class="container animated-section">
-            <div class="rulebook">
-                <div class="rulebook-header">
-                    <h2>✨ NỘI QUY SINH HOẠT ✨</h2>
-                    <p>Câu lạc bộ Người Yêu Thích Anime/Manga</p>
-                </div>
-                <div class="rule-section">
-                    <div class="rule">
-                        <h4>
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 3V21" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.89 19.5C18.4239 17.5134 18.7303 15.3411 18.75 13.12C18.7303 10.8989 18.4239 8.72661 17.89 6.74L6.11 17.26C6.57463 17.7011 7.10659 18.0673 7.68 18.35C8.89506 18.9642 10.3238 19.3444 11.96 19.49" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M6.11 6.74C5.57608 8.72661 5.26974 10.8989 5.25 13.12C5.26974 15.3411 5.57608 17.5134 6.11 19.5L17.89 8.98C17.4254 8.5389 16.8934 8.17267 16.32 7.89C15.1049 7.27576 13.6762 6.89557 12.04 6.75" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                            Điều 1: Mục đích - Tôn chỉ
-                        </h4>
-                        <p>Tạo ra một sân chơi chung, một "thế giới song song" lành mạnh, sáng tạo và đầy đam mê cho tất cả những trái tim yêu thích văn hóa Anime/Manga, đồng thời xây dựng một cộng đồng gắn kết và văn minh.</p>
-                    </div>
-                    <div class="rule">
-                        <h4>
-                           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.11 10.83L14.53 13.41L12.55 11.43L15.13 8.85002C16.66 7.32002 17.92 7.82002 18.66 8.56002C19.4 9.30002 18.9 10.56 17.41 12.05L14.83 14.63L12.45 12.25L10.37 14.33L7.14 11.1L3 15.24V19.38C3 21.04 4.14 22.18 5.79 22.18H9.93L13.16 19.01L15.68 21.53C16.4 22.25 17.56 22.25 18.28 21.53L20.42 19.39C21.14 18.67 21.14 17.51 20.42 16.79L18.57 14.94L17.11 10.83ZM4.83999 10.98L7.41999 8.4L11.56 12.54L8.93999 15.16C8.21999 15.88 7.39999 16.29 6.40999 16.29C4.54999 16.29 3.01999 14.76 3.01999 12.9C3.01999 11.91 3.42999 11.7 4.83999 10.98Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 5.86C21.2 4.67 22.18 4.29 22.18 3C22.18 1.48 20.67 0 19.12 0C17.53 0 16.14 1.77 17.52 3.14L18.42 4.04" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                           Điều 3: Quy tắc ứng xử chung ("Luật Bất Thành Văn")
-                        </h4>
-                        <ol>
-                            <li><span>Tinh thần chung:</span> Hoạt động của CLB dựa trên tinh thần <span>đam mê, tự nguyện, tôn trọng, đoàn kết, công bằng</span> và <span>văn minh</span>.</li>
-                            <li><span>Tham gia & Trách nhiệm:</span> Thành viên có trách nhiệm tham gia các buổi sinh hoạt định kỳ. Nếu vắng mặt, vui lòng báo trước cho Ban Quản lý.</li>
-                            <li><span>Văn hóa giao tiếp:</span> Luôn giữ thái độ lịch sự, hòa đồng. "Tôn trọng gu của nhau, không toxic". Thảo luận văn minh, không công kích cá nhân.</li>
-                            <li><span>NGHIÊM CẤM SPOILER:</span> Không "spoiler" trắng trợn khi chưa có sự đồng ý hoặc cảnh báo. Hãy là một người "spoiler có tâm"!</li>
-                            <li><span>Trong sự kiện:</span> Giữ gìn vệ sinh, trật tự. CẤM các hành vi thiếu văn hóa, trái pháp luật.</li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <footer id="contact" class="footer container animated-section">
-        <div class="footer-logo">Ani-Manga Club</div>
-        <div class="footer-content">
-            <p>CÙNG NHAU, CHÚNG TA SẼ TẠO NÊN MỘT THẾ GIỚI 2D SỐNG ĐỘNG HƠN BAO GIỜ HẾT!</p>
-            <div class="footer-contact">
-                <p>Mọi thắc mắc và góp ý, xin vui lòng liên hệ:</p>
-                <p><strong>admin@aniw.xyz</strong></p>
-            </div>
-             <a href="https://forms.gle/pxsu9CVXhushR4cR9" target="_blank" class="btn primary animated-section" style="transition-delay: 0.2s;">Tham gia ngay</a>
-        </div>
-    </footer>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const animatedSections = document.querySelectorAll('.animated-section');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            animatedSections.forEach(section => {
-                observer.observe(section);
-            });
-            const navLinks = document.querySelectorAll('.navbar-links a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                         const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset - 80;
-                         window.scrollTo({
-                             top: offsetTop,
-                             behavior: 'smooth'
-                         });
-                    }
-                });
-            });
-            let lastScrollTop = 0;
-            const navbar = document.querySelector('.navbar');
-            window.addEventListener("scroll", function() {
-                let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-                if (currentScroll > lastScrollTop && lastScrollTop > 100) {
-                    navbar.style.top = "-100px"; 
-                } else {
-                    navbar.style.top = "0";
-                }
-                lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-            }, false);
-        });
-    </script>
-</body>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
 </html>
